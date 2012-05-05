@@ -8,7 +8,7 @@ import java.util.Collections;
 
 import org.junit.Test;
 
-public class CollectionsCollectTest {
+public class CollectTest {
 
 	private static final CollectionFunctions.Function<Object, Boolean> FALSE_FUNCTION = new CollectionFunctions.Function<Object, Boolean>() {
 		public Boolean call(Object input) {

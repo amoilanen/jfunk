@@ -10,30 +10,29 @@ import java.util.Collections;
 
 import org.junit.Test;
 
-public class CollectionsAllTest {
+public class AnyTest {
 
 	private static final CollectionFunctions.Function<Object, Boolean> FALSE_FUNCTION = new CollectionFunctions.Function<Object, Boolean>() {
 		public Boolean call(Object input) {
 			return false;
 		}
 	};
-	
-	//all
+
 	@Test
-	public void ifAllCalledWithEmptyCollectionThenTrue() {
-		assertTrue(CollectionFunctions.all(Collections.<Object>emptyList(), FALSE_FUNCTION));
+	public void ifAnyCalledWithEmptyCollectionThenFalse() {
+		assertFalse(CollectionFunctions.any(Collections.<Object>emptyList(), FALSE_FUNCTION));
 	}
 	
 	@Test
-	public void ifAllCalledWithNullArgumentsThenExceptionIsRaised() {
+	public void ifAnyCalledWithNullArgumentsThenExceptionIsRaised() {
 		try {
-			CollectionFunctions.all(Collections.emptyList(), null);
+			CollectionFunctions.any(Collections.emptyList(), null);
 			fail("Exception should have been raised");
 		} catch (IllegalArgumentException expected) {
 			assertEquals("Null argument number 2", expected.getMessage());
 		}
 		try {
-			CollectionFunctions.all(null, FALSE_FUNCTION);
+			CollectionFunctions.any(null, FALSE_FUNCTION);
 			fail("Exception should have been raised");
 		} catch (IllegalArgumentException expected) {
 			assertEquals("Null argument number 1", expected.getMessage());
@@ -41,8 +40,8 @@ public class CollectionsAllTest {
 	}
 	
 	@Test
-	public void ifAllCalledAllElementsSatisfyConditionThenTrue() {
-		assertTrue(CollectionFunctions.all(Arrays.asList("one", "two", "three"), new CollectionFunctions.Function<String, Boolean> () {
+	public void ifAnyCalledThereIsElementSatisfyingConditionThenTrue() {
+		assertTrue(CollectionFunctions.any(Arrays.asList("", "two", ""), new CollectionFunctions.Function<String, Boolean> () {
 			public Boolean call(String input) {
 				return input.length() > 0;
 			}
@@ -50,8 +49,8 @@ public class CollectionsAllTest {
 	}
 	
 	@Test
-	public void ifAllCalledNotAllCollectionElementsSatisfyConditionThenFalse() {
-		assertFalse(CollectionFunctions.all(Arrays.asList("one", "", "three"), new CollectionFunctions.Function<String, Boolean> () {
+	public void ifAnyCalledNoElementSatisfyingConditionThenFalse() {
+		assertFalse(CollectionFunctions.any(Arrays.asList("", "", ""), new CollectionFunctions.Function<String, Boolean> () {
 			public Boolean call(String input) {
 				return input.length() > 0;
 			}

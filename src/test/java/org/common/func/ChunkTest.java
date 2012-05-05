@@ -9,7 +9,7 @@ import java.util.List;
 
 import org.junit.Test;
 
-public class CollectionsChunkTest {
+public class ChunkTest {
 
 	private final static CollectionFunctions.Function<Integer, Boolean> isEven = new CollectionFunctions.Function<Integer, Boolean>() {
 		public Boolean call(Integer input) {

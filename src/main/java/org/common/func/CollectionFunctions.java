@@ -62,8 +62,24 @@ public class CollectionFunctions {
 
 		return pairs;
 	}
+	
+	public static <T> Collection<T> concat(Collection<T> c1, Collection<T> c2) {
+		List<T> result = new ArrayList<T>(c1);
 
-//	#collect_concat
+		result.addAll(c2);
+		return result;
+	}
+
+	public static <T, U> Collection<U> collectConcat(Collection<T> c, Function<T, Collection<U>> conversion) {
+		Collection<Collection<U>> collectedParts = collect(c, conversion);
+		Collection<U> result = new ArrayList<U>();
+
+		for (Collection<U> part : collectedParts) {
+			result = concat(result, part);
+		};
+		return result;
+	}
+
 //	#count
 //	#cycle
 //	#detect
@@ -106,7 +122,6 @@ public class CollectionFunctions {
 //	#take_while
 //	#to_a
 //	#zip
-	
 	
 	//TODO: Add a separate utility that will convert the returned collections to a specific type, such as Set, or List, or array
     //TODO: Re-factor commonality between the different functions
