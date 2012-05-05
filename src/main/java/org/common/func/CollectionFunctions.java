@@ -39,7 +39,30 @@ public class CollectionFunctions {
 		return result;
 	}
 	
-//	#chunk
+	public static <T, U> Collection<Pair<U, Collection<T>>> chunk(Collection<T> c, Function<T, U> conversion) {
+		verifyArguments(c, conversion);
+		List<Pair<U, Collection<T>>> pairs = new ArrayList<Pair<U, Collection<T>>>();
+		
+		List<T> previousChunk = new ArrayList<T>();
+		U previousChunkKey = null;
+		for (T e : c) {
+			U currentChunkKey = conversion.call(e);
+			if ((null == previousChunkKey) || !currentChunkKey.equals(previousChunkKey)) {		
+				if (previousChunk.size() > 0) {
+					pairs.add(new Pair<U, Collection<T>>(previousChunkKey, previousChunk));
+				};
+				previousChunk = new ArrayList<T>();
+				previousChunkKey = currentChunkKey;
+			};
+			previousChunk.add(e);
+		};
+		if (previousChunk.size() > 0) {
+			pairs.add(new Pair<U, Collection<T>>(previousChunkKey, previousChunk));
+		};
+
+		return pairs;
+	}
+
 //	#collect_concat
 //	#count
 //	#cycle
