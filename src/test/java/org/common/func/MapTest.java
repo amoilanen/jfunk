@@ -2,9 +2,13 @@ package org.common.func;
 
 import static junit.framework.Assert.assertEquals;
 import static junit.framework.Assert.fail;
+import static org.common.func.Enumerables.map;
 
+import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collections;
+import java.util.Collection;
+import java.util.HashSet;
+import java.util.LinkedList;
 
 import org.common.func.Enumerables.Function;
 import org.junit.Test;
@@ -28,13 +32,31 @@ public class MapTest {
 	@Test
 	public void ifMapIsCalledWithCollectionFunctionIsAppliedToAllElements() {
 		assertEquals(Arrays.asList("aaaa", "aaa", "a", "aaaaa", "aa"),
-		    Enumerables.map(Arrays.asList(4, 3, 1, 5, 2), toString));
+		    map(Arrays.asList(4, 3, 1, 5, 2), toString));
 	};
 
 	@Test
-	public void ifMapWithEmptyCollectionThenEmptyCollectionIsReturned() {
-		assertEquals(Collections.emptyList(),
-				Enumerables.map(Collections.<Integer>emptyList(), toString));
+	public void ifMapIsCalledExceplicitSpecificationOfResultTypeAsSet() {
+		Collection<String> result = map(Arrays.asList(4, 3, 1, 5, 2), toString, HashSet.class);
+		
+		assertEquals(HashSet.class, result.getClass());
+		assertEquals(Sets.set("aaaa", "aaa", "aa", "aaaaa", "a"), result);
+	};
+
+	@Test
+	public void ifMapIsCalledExceplicitSpecificationOfResultTypeAsArrayList() {		
+		Collection<String> result = map(Arrays.asList(4, 3, 1, 5, 2), toString, ArrayList.class);
+		
+		assertEquals(ArrayList.class, result.getClass());
+		assertEquals(Arrays.asList("aaaa", "aaa", "a", "aaaaa", "aa"), result);
+	};
+
+	@Test
+	public void ifMapIsCalledExceplicitSpecificationOfResultTypeAsLinkedList() {
+		Collection<String> result = map(Arrays.asList(4, 3, 1, 5, 2), toString, LinkedList.class);
+		
+		assertEquals(LinkedList.class, result.getClass());
+		assertEquals(Arrays.asList("aaaa", "aaa", "a", "aaaaa", "aa"), result);
 	};
 
 	@Test

@@ -83,16 +83,19 @@ public class Enumerables {
 		return result;
 	}
 	
-	public static <T, U> Collection<U> map(Collection<T> c, Function<T, U> f) {
+	//TODO: Parameterize with the return type like 'map' all the other methods in the present class
+	
+	@SuppressWarnings("unchecked")
+	public static <T, U> Collection<U> map(Collection<T> c, Function<T, U> f, Class<?>... resultType) {
 		verifyArguments(c, f);
-		Collection<U> result = new ArrayList<U>();
+		Collection<U> result = (Collection<U>) (resultType.length > 0 ? instantiate(resultType[0]) : new ArrayList<U>());
 
 		for (T e : c) {
 			result.add(f.call(e));
 		};
 		return result;
 	}
-
+	
 	public static <T, U> U reduce(Collection<T> c, Function<Pair<U, T>, U> f, U acc) {
 		verifyArguments(c, f, acc);
 		for (T e : c) {
@@ -100,8 +103,6 @@ public class Enumerables {
 		};
 		return acc;
 	}
-
-//	#reduce
 
 //	#count
 //	#cycle
@@ -143,9 +144,18 @@ public class Enumerables {
 //	#take_while
 //	#to_a
 //	#zip
-	
-	//TODO: Add a separate utility that will convert the returned collections to a specific type, such as Set, or List, or array
+
     //TODO: Re-factor commonality between the different functions
+
+	private static <T> T instantiate(Class<T> type) {
+		try {
+			return type.newInstance();
+		} catch (InstantiationException exception) {
+			throw new RuntimeException(exception);
+		} catch (IllegalAccessException exception) {
+			throw new RuntimeException(exception);
+		}
+	};
 	
 	private static void verifyArguments(Object... args) {
 		for (int i = 0; i < args.length; i++) {
