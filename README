@@ -1,11 +1,7 @@
 The basic ideas (implementation in progress):
 
-- The API for JFunk should stay as simple as possible, no Enumerables.filterSet, Enumerables.filterList, etc. there should
-be one Enumerables.filter. Try to avoid the combinatorial explosion with many Java collection classes.
+- The API for JFunk should stay as simple as possible, no Enumerables.filterSet, Enumerables.filterList, etc. there should be one Enumerables.filter. Try to avoid the combinatorial explosion with many Java collection classes.
 
-- Type conversions of the result to the desired collection type should happen by default to the most sensible type (ArrayList for Enumerables),
-if another type is defined, then it should be explicitly specified during the function invocation. For details, see the implementation of Enumerables.map
+- Type conversions of the result to the desired collection type should happen by default to the most sensible type (ArrayList for Enumerables), if another type is desired, then it should be explicitly specified during the function invocation. For details, see the implementation of Enumerables.map
 
-- Functions in Enumerables are the most generic ones, 'map', 'reduce' etc. Everything that can be applied to a Collection.
-Functions in Sets should be specific to sets: Set contains the right functions if no function from Sets can be physically moved to another class
-like Enumerables. The same goes for Maps and Iterators.
+- Functions in Enumerables are the most generic ones, 'map', 'reduce' etc. Everything that can be applied to a Collection. Functions in Sets should be specific to sets: Set contains the right functions if no function from Sets can be physically moved to another class like Enumerables. The same goes for Maps and Iterators.
