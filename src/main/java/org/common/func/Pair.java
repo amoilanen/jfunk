@@ -1,5 +1,11 @@
 package org.common.func;
 
+/**
+ * Generic pair, see http://en.wikipedia.org/wiki/Cons
+ *
+ * @param <T1>
+ * @param <T2>
+ */
 public class Pair<T1, T2> {
 
 	private final T1 first;

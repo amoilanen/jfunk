@@ -12,28 +12,27 @@ import org.junit.Test;
 
 public class AllTest {
 
-	private static final CollectionFunctions.Function<Object, Boolean> FALSE_FUNCTION = new CollectionFunctions.Function<Object, Boolean>() {
+	private static final Enumerables.Function<Object, Boolean> FALSE_FUNCTION = new Enumerables.Function<Object, Boolean>() {
 		public Boolean call(Object input) {
 			return false;
 		}
 	};
-	
-	//all
+
 	@Test
 	public void ifAllCalledWithEmptyCollectionThenTrue() {
-		assertTrue(CollectionFunctions.all(Collections.<Object>emptyList(), FALSE_FUNCTION));
+		assertTrue(Enumerables.all(Collections.<Object>emptyList(), FALSE_FUNCTION));
 	}
 	
 	@Test
 	public void ifAllCalledWithNullArgumentsThenExceptionIsRaised() {
 		try {
-			CollectionFunctions.all(Collections.emptyList(), null);
+			Enumerables.all(Collections.emptyList(), null);
 			fail("Exception should have been raised");
 		} catch (IllegalArgumentException expected) {
 			assertEquals("Null argument number 2", expected.getMessage());
 		}
 		try {
-			CollectionFunctions.all(null, FALSE_FUNCTION);
+			Enumerables.all(null, FALSE_FUNCTION);
 			fail("Exception should have been raised");
 		} catch (IllegalArgumentException expected) {
 			assertEquals("Null argument number 1", expected.getMessage());
@@ -42,7 +41,7 @@ public class AllTest {
 	
 	@Test
 	public void ifAllCalledAllElementsSatisfyConditionThenTrue() {
-		assertTrue(CollectionFunctions.all(Arrays.asList("one", "two", "three"), new CollectionFunctions.Function<String, Boolean> () {
+		assertTrue(Enumerables.all(Arrays.asList("one", "two", "three"), new Enumerables.Function<String, Boolean> () {
 			public Boolean call(String input) {
 				return input.length() > 0;
 			}
@@ -51,7 +50,7 @@ public class AllTest {
 	
 	@Test
 	public void ifAllCalledNotAllCollectionElementsSatisfyConditionThenFalse() {
-		assertFalse(CollectionFunctions.all(Arrays.asList("one", "", "three"), new CollectionFunctions.Function<String, Boolean> () {
+		assertFalse(Enumerables.all(Arrays.asList("one", "", "three"), new Enumerables.Function<String, Boolean> () {
 			public Boolean call(String input) {
 				return input.length() > 0;
 			}

@@ -14,12 +14,12 @@ public class ConcatTest {
 	@Test
 	public void ifTwoCollectionsAreConcatenatedThenResultContainsAllTheirElements() {
 		assertEquals(Arrays.asList(1, 2, 3, 4, 5), 
-				CollectionFunctions.concat(Arrays.asList(1, 2, 3), Arrays.asList(4, 5)));
+				Enumerables.concat(Arrays.asList(1, 2, 3), Arrays.asList(4, 5)));
 	}
 	
 	@Test
 	public void ifCollectConcatIsACompositionOfCollectAndConcat() {
-		assertEquals(Arrays.asList(1, 2, 2, 3, 3, 3), CollectionFunctions.collectConcat(Arrays.asList(1, 2, 3), new CollectionFunctions.Function<Integer, Collection<Integer>>() {
+		assertEquals(Arrays.asList(1, 2, 2, 3, 3, 3), Enumerables.collectConcat(Arrays.asList(1, 2, 3), new Enumerables.Function<Integer, Collection<Integer>>() {
 
 			public Collection<Integer> call(Integer input) {
 				List<Integer> result = new ArrayList<Integer>();
