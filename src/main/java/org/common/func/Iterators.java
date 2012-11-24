@@ -7,5 +7,9 @@ package org.common.func;
 public enum Iterators {
 
 	//merge
+	//union
+	//transform
+	//drop
+	//takeWhile
 	//toArray etc
 }
