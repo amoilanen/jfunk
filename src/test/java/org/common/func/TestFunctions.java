@@ -1,16 +1,17 @@
 package org.common.func;
 
 import org.common.func.Enumerables.Function;
+import org.common.func.Enumerables.Predicate;
 
 public class TestFunctions {
 
-	public static final Enumerables.Function<Object, Boolean> falseValue = new Enumerables.Function<Object, Boolean>() {
+	public static final Predicate<Object> falseValue = new Predicate<Object>() {
 		public Boolean call(Object input) {
 			return false;
 		}
 	};
 
-	public final static Enumerables.Function<Integer, Boolean> isEven = new Enumerables.Function<Integer, Boolean>() {
+	public final static Predicate<Integer> isEven = new Predicate<Integer>() {
 		public Boolean call(Integer input) {
 			return 0 == input.intValue() % 2;
 		}

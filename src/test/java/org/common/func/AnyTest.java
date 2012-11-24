@@ -9,6 +9,7 @@ import static org.common.func.TestFunctions.falseValue;
 import java.util.Arrays;
 import java.util.Collections;
 
+import org.common.func.Enumerables.Predicate;
 import org.junit.Test;
 
 public class AnyTest {
@@ -36,7 +37,7 @@ public class AnyTest {
 	
 	@Test
 	public void ifAnyCalledThereIsElementSatisfyingConditionThenTrue() {
-		assertTrue(Enumerables.any(Arrays.asList("", "two", ""), new Enumerables.Function<String, Boolean> () {
+		assertTrue(Enumerables.any(Arrays.asList("", "two", ""), new Predicate<String> () {
 			public Boolean call(String input) {
 				return input.length() > 0;
 			}
@@ -45,7 +46,7 @@ public class AnyTest {
 	
 	@Test
 	public void ifAnyCalledNoElementSatisfyingConditionThenFalse() {
-		assertFalse(Enumerables.any(Arrays.asList("", "", ""), new Enumerables.Function<String, Boolean> () {
+		assertFalse(Enumerables.any(Arrays.asList("", "", ""), new Predicate<String> () {
 			public Boolean call(String input) {
 				return input.length() > 0;
 			}

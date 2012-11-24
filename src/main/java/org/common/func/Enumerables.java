@@ -15,20 +15,20 @@ import java.util.List;
  */
 public class Enumerables {
 
-	public static <T> Boolean all(Collection<T> c, Function<T, Boolean> cond) {
-		verifyArguments(c, cond);		
+	public static <T> Boolean all(Collection<T> c, Predicate<T> p) {
+		verifyArguments(c, p);		
 		for (T e : c) {
-			if (!cond.call(e)) {
+			if (!p.call(e)) {
 				return false;
 			}
 		}
 		return true;
 	}
 	
-	public static <T> Boolean any(Collection<T> c, Function<T, Boolean> cond) {
-		verifyArguments(c, cond);
+	public static <T> Boolean any(Collection<T> c, Predicate<T> p) {
+		verifyArguments(c, p);
 		for (T e : c) {
-			if (cond.call(e)) {
+			if (p.call(e)) {
 				return true;
 			}
 		}
@@ -36,27 +36,27 @@ public class Enumerables {
 	}
 
 	@SuppressWarnings("unchecked")
-	public static <T, U, Y extends Collection<U>> Y collect(Collection<T> c, Function<T, U> conversion, Class<?>... resultType) {
-		verifyArguments(c, conversion);
+	public static <T, U, Y extends Collection<U>> Y collect(Collection<T> c, Function<T, U> f, Class<?>... resultType) {
+		verifyArguments(c, f);
 		
 		Y result = (Y) (resultType.length > 0 ? instantiate(resultType[0]) : new ArrayList<U>());
 		
 		for (T e : c) {
-			result.add(conversion.call(e));
+			result.add(f.call(e));
 		}
 		return result;
 	}
 
 	@SuppressWarnings("unchecked")
-	public static <T, U, Y extends Collection<T>> Collection<Pair<U, Y>> chunk(Collection<T> c, Function<T, U> conversion, Class<?>... resultType) {
-		verifyArguments(c, conversion);
+	public static <T, U, Y extends Collection<T>> Collection<Pair<U, Y>> chunk(Collection<T> c, Function<T, U> f, Class<?>... resultType) {
+		verifyArguments(c, f);
 		
 		List<Pair<U, Y>> pairs = (List<Pair<U, Y>>) (resultType.length > 0 ? instantiate(resultType[0]) : new ArrayList<Pair<U, Y>>());
 
 		Y previousChunk = (Y) (resultType.length > 0 ? instantiate(resultType[0]) : new ArrayList<T>());
 		U previousChunkKey = null;
 		for (T e : c) {
-			U currentChunkKey = conversion.call(e);
+			U currentChunkKey = f.call(e);
 			if ((null == previousChunkKey) || !currentChunkKey.equals(previousChunkKey)) {		
 				if (previousChunk.size() > 0) {
 					pairs.add(new Pair<U, Y>(previousChunkKey, previousChunk));
@@ -83,9 +83,9 @@ public class Enumerables {
 	}
 
 	@SuppressWarnings("unchecked")
-	public static <T, U, Y extends Collection<U>> Y collectConcat(Collection<T> c, Function<T, Collection<U>> conversion, Class<?>... resultType) {
+	public static <T, U, Y extends Collection<U>> Y collectConcat(Collection<T> c, Function<T, Collection<U>> f, Class<?>... resultType) {
 		Y result = (Y) (resultType.length > 0 ? instantiate(resultType[0]) : new ArrayList<U>());
-		Collection<Collection<U>> collectedParts = collect(c, conversion);
+		Collection<Collection<U>> collectedParts = collect(c, f);
 
 		for (Collection<U> part : collectedParts) {
 			result = concat(result, part, resultType);
@@ -128,7 +128,7 @@ public class Enumerables {
 		return result.toString();
 	};
 
-	public static <T> int count(Collection<T> c, Function<T, Boolean> p) {
+	public static <T> int count(Collection<T> c, Predicate<T> p) {
 		verifyArguments(c, p);
 		int result = 0;
 
@@ -204,5 +204,8 @@ public class Enumerables {
 	
 	public static interface Function<T, E> {
 		E call(T input);
+	}
+	
+	public static interface Predicate<T> extends Function<T, Boolean> {
 	}
 }
