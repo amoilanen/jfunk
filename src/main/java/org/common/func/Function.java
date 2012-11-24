@@ -1,5 +1,5 @@
 package org.common.func;
 
 public interface Function<T, E> {
-	E call(T input);
+	E call(T x);
 }

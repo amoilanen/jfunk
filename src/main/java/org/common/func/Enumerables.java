@@ -140,8 +140,13 @@ public class Enumerables {
 		return result;
 	};
 
-//TODO: Do we need all of the methods in the first version?
+	public static <T> void each(Collection<T> c, Action<T> p) {
+		//TODO: Implement
+	};
+
 //	#cycle
+
+//TODO: Do we need all of the methods in the first version?
 //	#detect
 //	#drop
 //	#drop_while
