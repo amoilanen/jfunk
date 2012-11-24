@@ -35,15 +35,15 @@ public class Functions {
 
     public final static Function<Pair<Integer, Integer>, Integer> sum = new Function<Pair<Integer, Integer>, Integer>() {
         
-        public Integer call(Pair<Integer, Integer> input) {
-            return input.getFirst() + input.getSecond();
+        public Integer call(Pair<Integer, Integer> x) {
+            return x.h + x.t;
         };
     };
 
     public final static Function<Pair<Integer, Integer>, Integer> mult = new Function<Pair<Integer, Integer>, Integer>() {
         
-        public Integer call(Pair<Integer, Integer> input) {
-            return input.getFirst() * input.getSecond();
+        public Integer call(Pair<Integer, Integer> x) {
+            return x.h * x.t;
         };
     };
 }

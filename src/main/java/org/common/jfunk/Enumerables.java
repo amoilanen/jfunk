@@ -2,7 +2,10 @@ package org.common.jfunk;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Iterator;
 import java.util.List;
+
+import static org.common.jfunk.Pair.pair;
 
 /**
  * Functions analogous to those available in the Ruby's Enumerable module.
@@ -157,6 +160,24 @@ public class Enumerables {
         };
     };
 
+    public static <T> void eachWithIndex(Collection<T> c, Action<Pair<T, Integer>> a) {
+        verifyArguments(c, a);
+        int cSize = c.size();
+        Iterator<T> cIterator = c.iterator();
+
+        for (int i = 0; i < cSize; i++) {
+            a.perform(pair(cIterator.next(), i));
+        };
+    };
+
+    public static <T, U> U eachWithObject(Collection<T> c, Action<Pair<T, U>> a, U acc) {
+        verifyArguments(c, a, acc);
+        for (T e : c) {
+            a.perform(pair(e, acc));
+        };
+        return acc;
+    };
+
 //TODO: Do we need all of the methods in the first version?
 //    #detect
 //    #drop
@@ -164,8 +185,6 @@ public class Enumerables {
 //    #each_cons
 //    #each_entry
 //    #each_slice
-//    #each_with_index
-//    #each_with_object
 //    #entries
 //    #find
 //    #find_all

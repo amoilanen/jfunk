@@ -8,30 +8,24 @@ package org.common.jfunk;
  */
 public class Pair<T1, T2> {
 
-    private final T1 first;
+    //Head
+    public final T1 h;
 
-    private final T2 second;
+    //Tail
+    public final T2 t;
 
-    public Pair(T1 first, T2 second) {
-        this.first = first;
-        this.second = second;
-    }
-
-    public T1 getFirst() {
-        return first;
-    }
-
-    public T2 getSecond() {
-        return second;
+    public Pair(T1 h, T2 t) {
+        this.h = h;
+        this.t = t;
     }
 
     @Override
     public int hashCode() {
         final int prime = 31;
         int result = 1;
-        result = prime * result + ((first == null) ? 0 : first.hashCode());
+        result = prime * result + ((h == null) ? 0 : h.hashCode());
         result = prime * result
-                + ((second == null) ? 0 : second.hashCode());
+                + ((t == null) ? 0 : t.hashCode());
         return result;
     }
 
@@ -45,25 +39,25 @@ public class Pair<T1, T2> {
             return false;
         @SuppressWarnings("rawtypes")
         Pair other = (Pair) obj;
-        if (first == null) {
-            if (other.first != null)
+        if (h == null) {
+            if (other.h != null)
                 return false;
-        } else if (!first.equals(other.first))
+        } else if (!h.equals(other.h))
             return false;
-        if (second == null) {
-            if (other.second != null)
+        if (t == null) {
+            if (other.t != null)
                 return false;
-        } else if (!second.equals(other.second))
+        } else if (!t.equals(other.t))
             return false;
         return true;
     }
 
     @Override
     public String toString() {
-        return "Pair [first=" + first + ", second=" + second + "]";
+        return "Pair [h=" + h + ", t=" + t + "]";
     }
 
-    public static <T1, T2> Pair<T1, T2> pair(T1 first, T2 second) {
-        return new Pair<T1, T2>(first, second);
+    public static <T1, T2> Pair<T1, T2> pair(T1 h, T2 t) {
+        return new Pair<T1, T2>(h, t);
     };
 }
