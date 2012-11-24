@@ -7,15 +7,11 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import static org.common.func.TestFunctions.isEven;
+
 import org.junit.Test;
 
 public class ChunkTest {
-
-	private final static Enumerables.Function<Integer, Boolean> isEven = new Enumerables.Function<Integer, Boolean>() {
-		public Boolean call(Integer input) {
-			return 0 == input.intValue() % 2;
-		}
-	};
 	
 	@SuppressWarnings("unchecked")
 	@Test

@@ -113,6 +113,7 @@ public class Enumerables {
 	}
 	
 	public static <T> String join(Collection<T> c, String... separator) {
+		verifyArguments(c);
 		StringBuilder result = new StringBuilder();
 		String sep = (separator.length > 0) ? separator[0] : ",";
 		int lastIndex = -1;
@@ -125,6 +126,18 @@ public class Enumerables {
 			result.replace(result.length() - sep.length(), result.length(), "");
 		};
 		return result.toString();
+	};
+
+	public static <T> int count(Collection<T> c, Function<T, Boolean> p) {
+		verifyArguments(c, p);
+		int result = 0;
+
+		for (T e : c) {
+			if (p.call(e)) {
+				result++;
+			}
+		};
+		return result;
 	};
 
 //TODO: Do we need all of the methods in the first version?

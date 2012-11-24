@@ -3,6 +3,7 @@ package org.common.func;
 import static junit.framework.Assert.assertEquals;
 import static junit.framework.Assert.fail;
 import static org.common.func.Enumerables.map;
+import static org.common.func.TestFunctions.toString;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -12,24 +13,9 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Set;
 
-import org.common.func.Enumerables.Function;
 import org.junit.Test;
 
 public class MapTest {
-	
-	private final static Function<Integer, String> toString = new Function<Integer, String>() {
-
-    	private static final String STRING = "a";
-    	
-		public String call(Integer input) {
-			StringBuilder result = new StringBuilder();
-			
-			for (int i = 0 ; i < input; i++) {
-				result.append(STRING);
-			};
-			return result.toString();
-		};
-    };
 
 	@Test
 	public void ifMapIsCalledWithCollectionFunctionIsAppliedToAllElements() {

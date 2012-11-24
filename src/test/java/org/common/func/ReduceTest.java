@@ -2,28 +2,15 @@ package org.common.func;
 
 import static junit.framework.Assert.assertEquals;
 import static junit.framework.Assert.fail;
+import static org.common.func.TestFunctions.mult;
+import static org.common.func.TestFunctions.sum;
 
 import java.util.Arrays;
 import java.util.Collections;
 
-import org.common.func.Enumerables.Function;
 import org.junit.Test;
 
 public class ReduceTest {
-	
-	private final static Function<Pair<Integer, Integer>, Integer> sum = new Function<Pair<Integer, Integer>, Integer>() {
-    	
-		public Integer call(Pair<Integer, Integer> input) {
-			return input.getFirst() + input.getSecond();
-		};
-    };
-
-    private final static Function<Pair<Integer, Integer>, Integer> mult = new Function<Pair<Integer, Integer>, Integer>() {
-    	
-    	public Integer call(Pair<Integer, Integer> input) {
-    		return input.getFirst() * input.getSecond();
-    	};
-    };
 
 	@Test
 	public void ifReduceWithAllArgumentsThenAllElementsAreUsedForComputation() {
