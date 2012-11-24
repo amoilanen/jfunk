@@ -1,4 +1,4 @@
-package org.common.func;
+package org.common.jfunk;
 
 /**
  * Generic pair, see http://en.wikipedia.org/wiki/Cons

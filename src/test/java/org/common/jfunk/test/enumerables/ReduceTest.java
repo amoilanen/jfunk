@@ -1,14 +1,14 @@
-package org.common.func.enumerables;
+package org.common.jfunk.test.enumerables;
 
 import static junit.framework.Assert.assertEquals;
 import static junit.framework.Assert.fail;
-import static org.common.func.Functions.mult;
-import static org.common.func.Functions.sum;
+import static org.common.jfunk.test.Functions.mult;
+import static org.common.jfunk.test.Functions.sum;
 
 import java.util.Arrays;
 import java.util.Collections;
 
-import org.common.func.Enumerables;
+import org.common.jfunk.Enumerables;
 import org.junit.Test;
 
 public class ReduceTest {

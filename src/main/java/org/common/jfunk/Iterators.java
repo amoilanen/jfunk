@@ -1,4 +1,4 @@
-package org.common.func;
+package org.common.jfunk;
 
 /**
  * Utility functions for working with iterators.

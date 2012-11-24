@@ -1,4 +1,8 @@
-package org.common.func;
+package org.common.jfunk.test;
+
+import org.common.jfunk.Function;
+import org.common.jfunk.Pair;
+import org.common.jfunk.Predicate;
 
 
 public class Functions {

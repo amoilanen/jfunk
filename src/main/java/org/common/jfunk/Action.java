@@ -1,4 +1,4 @@
-package org.common.func;
+package org.common.jfunk;
 
 public abstract class Action<T> implements Function<T, Void> {
 	

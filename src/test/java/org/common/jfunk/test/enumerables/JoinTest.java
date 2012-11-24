@@ -1,7 +1,7 @@
-package org.common.func.enumerables;
+package org.common.jfunk.test.enumerables;
 
 import static junit.framework.Assert.assertEquals;
-import static org.common.func.Enumerables.join;
+import static org.common.jfunk.Enumerables.join;
 
 import java.util.Arrays;
 import java.util.Collections;

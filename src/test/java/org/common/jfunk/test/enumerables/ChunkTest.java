@@ -1,16 +1,16 @@
-package org.common.func.enumerables;
+package org.common.jfunk.test.enumerables;
 
 import static junit.framework.Assert.assertEquals;
-import static org.common.func.Pair.pair;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import static org.common.func.Functions.isEven;
+import static org.common.jfunk.Pair.pair;
+import static org.common.jfunk.test.Functions.isEven;
 
-import org.common.func.Enumerables;
-import org.common.func.Pair;
+import org.common.jfunk.Enumerables;
+import org.common.jfunk.Pair;
 import org.junit.Test;
 
 public class ChunkTest {

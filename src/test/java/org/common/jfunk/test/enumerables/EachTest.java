@@ -1,13 +1,13 @@
-package org.common.func.enumerables;
+package org.common.jfunk.test.enumerables;
 
 import static junit.framework.Assert.assertEquals;
 import static junit.framework.Assert.fail;
-import static org.common.func.Enumerables.each;
+import static org.common.jfunk.Enumerables.each;
 
 import java.util.Arrays;
 import java.util.Collections;
 
-import org.common.func.Action;
+import org.common.jfunk.Action;
 import org.junit.Test;
 
 public class EachTest {

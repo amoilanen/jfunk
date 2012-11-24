@@ -1,9 +1,9 @@
-package org.common.func.enumerables;
+package org.common.jfunk.test.enumerables;
 
 import static junit.framework.Assert.assertEquals;
 import static junit.framework.Assert.fail;
-import static org.common.func.Enumerables.map;
-import static org.common.func.Functions.toString;
+import static org.common.jfunk.Enumerables.map;
+import static org.common.jfunk.test.Functions.toString;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -13,8 +13,8 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Set;
 
-import org.common.func.Enumerables;
-import org.common.func.Sets;
+import org.common.jfunk.Enumerables;
+import org.common.jfunk.Sets;
 import org.junit.Test;
 
 public class MapTest {

@@ -1,4 +1,4 @@
-package org.common.func;
+package org.common.jfunk;
 
 import java.util.ArrayList;
 import java.util.Collection;

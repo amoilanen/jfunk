@@ -1,16 +1,16 @@
-package org.common.func.enumerables;
+package org.common.jfunk.test.enumerables;
 
 import static junit.framework.Assert.assertEquals;
 import static junit.framework.Assert.assertFalse;
 import static junit.framework.Assert.assertTrue;
 import static junit.framework.Assert.fail;
-import static org.common.func.Functions.falseValue;
+import static org.common.jfunk.test.Functions.falseValue;
 
 import java.util.Arrays;
 import java.util.Collections;
 
-import org.common.func.Enumerables;
-import org.common.func.Predicate;
+import org.common.jfunk.Enumerables;
+import org.common.jfunk.Predicate;
 import org.junit.Test;
 
 public class AnyTest {

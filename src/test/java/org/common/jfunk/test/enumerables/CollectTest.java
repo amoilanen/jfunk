@@ -1,15 +1,15 @@
-package org.common.func.enumerables;
+package org.common.jfunk.test.enumerables;
 
 import static junit.framework.Assert.assertEquals;
 import static junit.framework.Assert.fail;
 
-import static org.common.func.Functions.falseValue;
+import static org.common.jfunk.test.Functions.falseValue;
 
 import java.util.Arrays;
 import java.util.Collections;
 
-import org.common.func.Enumerables;
-import org.common.func.Function;
+import org.common.jfunk.Enumerables;
+import org.common.jfunk.Function;
 import org.junit.Test;
 
 public class CollectTest {
