@@ -140,8 +140,11 @@ public class Enumerables {
 		return result;
 	};
 
-	public static <T> void each(Collection<T> c, Action<T> p) {
-		//TODO: Implement
+	public static <T> void each(Collection<T> c, Action<T> a) {
+		verifyArguments(c, a);
+		for (T e : c) {
+			a.perform(e);
+		};
 	};
 
 //	#cycle
