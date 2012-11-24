@@ -9,16 +9,16 @@ import java.util.Set;
  */
 public class Sets {
 
-	//union
-	//subtract
-	//etc.
-	
-	public static <T> Set<T> set(T... elems) {
-		Set<T> result = new HashSet<T>();
+    //union
+    //subtract
+    //etc.
+    
+    public static <T> Set<T> set(T... elems) {
+        Set<T> result = new HashSet<T>();
 
-		for (T e : elems) {
-			result.add(e);
-		};
-		return result;
-	}
+        for (T e : elems) {
+            result.add(e);
+        };
+        return result;
+    }
 }

@@ -6,7 +6,7 @@ package org.common.jfunk;
  */
 public class Maps {
 
-	//sortByKey
-	//sortByValue
-	//etc.
+    //sortByKey
+    //sortByValue
+    //etc.
 }

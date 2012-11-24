@@ -6,10 +6,10 @@ package org.common.jfunk;
  */
 public enum Iterators {
 
-	//merge
-	//union
-	//transform
-	//drop
-	//takeWhile
-	//toArray etc
+    //merge
+    //union
+    //transform
+    //drop
+    //takeWhile
+    //toArray etc
 }
