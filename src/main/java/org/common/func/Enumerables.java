@@ -9,6 +9,9 @@ import java.util.List;
  * Return values can be the following:
  * ArrayList, HashSet
  * 
+ * This class is called <b>Enumerables</b> and not <b>Collections</b> in order not to confuse
+ * it with {@link java.util.Collections}
+ * 
  */
 public class Enumerables {
 
@@ -32,63 +35,68 @@ public class Enumerables {
 		return false;	
 	}
 
-	public static <T, U> Collection<U> collect(Collection<T> c, Function<T, U> conversion) {
+	@SuppressWarnings("unchecked")
+	public static <T, U, Y extends Collection<U>> Y collect(Collection<T> c, Function<T, U> conversion, Class<?>... resultType) {
 		verifyArguments(c, conversion);
-		List<U> result = new ArrayList<U>(c.size());
+		
+		Y result = (Y) (resultType.length > 0 ? instantiate(resultType[0]) : new ArrayList<U>());
 		
 		for (T e : c) {
 			result.add(conversion.call(e));
 		}
 		return result;
 	}
-	
-	public static <T, U> Collection<Pair<U, Collection<T>>> chunk(Collection<T> c, Function<T, U> conversion) {
+
+	@SuppressWarnings("unchecked")
+	public static <T, U, Y extends Collection<T>> Collection<Pair<U, Y>> chunk(Collection<T> c, Function<T, U> conversion, Class<?>... resultType) {
 		verifyArguments(c, conversion);
-		List<Pair<U, Collection<T>>> pairs = new ArrayList<Pair<U, Collection<T>>>();
 		
-		List<T> previousChunk = new ArrayList<T>();
+		List<Pair<U, Y>> pairs = (List<Pair<U, Y>>) (resultType.length > 0 ? instantiate(resultType[0]) : new ArrayList<Pair<U, Y>>());
+
+		Y previousChunk = (Y) (resultType.length > 0 ? instantiate(resultType[0]) : new ArrayList<T>());
 		U previousChunkKey = null;
 		for (T e : c) {
 			U currentChunkKey = conversion.call(e);
 			if ((null == previousChunkKey) || !currentChunkKey.equals(previousChunkKey)) {		
 				if (previousChunk.size() > 0) {
-					pairs.add(new Pair<U, Collection<T>>(previousChunkKey, previousChunk));
+					pairs.add(new Pair<U, Y>(previousChunkKey, previousChunk));
 				};
-				previousChunk = new ArrayList<T>();
+				previousChunk = (Y) (resultType.length > 0 ? instantiate(resultType[0]) : new ArrayList<T>());
 				previousChunkKey = currentChunkKey;
 			};
 			previousChunk.add(e);
 		};
 		if (previousChunk.size() > 0) {
-			pairs.add(new Pair<U, Collection<T>>(previousChunkKey, previousChunk));
+			pairs.add(new Pair<U, Y>(previousChunkKey, previousChunk));
 		};
 
 		return pairs;
 	}
 	
-	public static <T> Collection<T> concat(Collection<T> c1, Collection<T> c2) {
-		List<T> result = new ArrayList<T>(c1);
+	@SuppressWarnings("unchecked")
+	public static <T, Y extends Collection<T>> Y concat(Collection<T> c1, Collection<T> c2, Class<?>... resultType) {		
+		Y result = (Y) (resultType.length > 0 ? instantiate(resultType[0]) : new ArrayList<T>());
 
+		result.addAll(c1);
 		result.addAll(c2);
 		return result;
 	}
 
-	public static <T, U> Collection<U> collectConcat(Collection<T> c, Function<T, Collection<U>> conversion) {
+	@SuppressWarnings("unchecked")
+	public static <T, U, Y extends Collection<U>> Y collectConcat(Collection<T> c, Function<T, Collection<U>> conversion, Class<?>... resultType) {
+		Y result = (Y) (resultType.length > 0 ? instantiate(resultType[0]) : new ArrayList<U>());
 		Collection<Collection<U>> collectedParts = collect(c, conversion);
-		Collection<U> result = new ArrayList<U>();
 
 		for (Collection<U> part : collectedParts) {
-			result = concat(result, part);
+			result = concat(result, part, resultType);
 		};
 		return result;
 	}
 	
-	//TODO: Parameterize with the return type like 'map' all the other methods in the present class
-	
 	@SuppressWarnings("unchecked")
-	public static <T, U> Collection<U> map(Collection<T> c, Function<T, U> f, Class<?>... resultType) {
+	public static <T, U, Y extends Collection<U>> Y map(Collection<T> c, Function<T, U> f, Class<?>... resultType) {
 		verifyArguments(c, f);
-		Collection<U> result = (Collection<U>) (resultType.length > 0 ? instantiate(resultType[0]) : new ArrayList<U>());
+		Y result = (Y) (resultType.length > 0 ? instantiate(resultType[0]) : new ArrayList<U>());
 
 		for (T e : c) {
 			result.add(f.call(e));
@@ -103,6 +111,8 @@ public class Enumerables {
 		};
 		return acc;
 	}
+	
+	//TODO: join
 
 //	#count
 //	#cycle

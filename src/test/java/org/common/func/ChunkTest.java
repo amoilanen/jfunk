@@ -32,20 +32,24 @@ public class ChunkTest {
 		assertEquals(new ArrayList<Pair<Boolean, List<Integer>>>(), Enumerables.chunk(new ArrayList<Integer>(), isEven));
 	};
 	
-	@SuppressWarnings("unchecked")
 	@Test
 	public void ifChunkIsCalledAndThereIsSingleChunkThenSingleChunkIsReturned() {
-		assertEquals(Arrays.asList(
-				pair(Boolean.FALSE, Arrays.asList(1, 3, 5, 7, 9))), Enumerables.chunk(Arrays.asList(1, 3, 5, 7, 9), isEven));
+		@SuppressWarnings("unchecked")
+		List<Pair<Boolean, List<Integer>>> expected = Arrays.asList(
+		    pair(Boolean.FALSE, Arrays.asList(1, 3, 5, 7, 9)));
+		
+		assertEquals(expected, Enumerables.chunk(Arrays.asList(1, 3, 5, 7, 9), isEven));
 	};
 
-	@SuppressWarnings("unchecked")
 	@Test
 	public void ifChunkIsCalledAndEachChunkContainsOnlyOneElementThenElementsAreGroupedByValuesReturnedFromFunction() {
-		assertEquals(Arrays.asList(
-				pair(Boolean.FALSE, Arrays.asList(1)),
-		        pair(Boolean.TRUE, Arrays.asList(2)),
-		        pair(Boolean.FALSE, Arrays.asList(3))), Enumerables.chunk(Arrays.asList(1, 2, 3), isEven));
+		@SuppressWarnings("unchecked")
+		List<Pair<Boolean, List<Integer>>> expected = Arrays.asList(
+			pair(Boolean.FALSE, Arrays.asList(1)),
+		    pair(Boolean.TRUE, Arrays.asList(2)),
+		    pair(Boolean.FALSE, Arrays.asList(3)));
+		
+		assertEquals(expected, Enumerables.chunk(Arrays.asList(1, 2, 3), isEven));
 	};
 	
 	//TODO: Chunk key is null?

@@ -9,6 +9,8 @@ import java.util.Arrays;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.LinkedList;
+import java.util.List;
+import java.util.Set;
 
 import org.common.func.Enumerables.Function;
 import org.junit.Test;
@@ -57,6 +59,39 @@ public class MapTest {
 		
 		assertEquals(LinkedList.class, result.getClass());
 		assertEquals(Arrays.asList("aaaa", "aaa", "a", "aaaaa", "aa"), result);
+	};
+
+	@Test
+	public void ifReturnedCollectionIsOfSpecificTypeThenConversionIsConvenient() {
+		List<String> listResult = map(Arrays.asList(4, 3, 1, 5, 2), toString);
+		Set<String> setResult = map(Arrays.asList(4, 3, 1, 5, 2), toString, HashSet.class);
+		
+		assertEquals(ArrayList.class, listResult.getClass());
+		assertEquals(Arrays.asList("aaaa", "aaa", "a", "aaaaa", "aa"), listResult);
+				
+		assertEquals(HashSet.class, setResult.getClass());
+		assertEquals(Sets.set("aaaa", "aaa", "aa", "aaaaa", "a"), setResult);
+	};
+
+	/*
+	 * BE CAREFUL with wrong type conversions, the library leaves more freedom to you
+	 * with the assumption that you understand what you are doing.
+	 */
+	@Test
+	public void ifTypeConversionIsNotCorrectThenCompileIsSilentAndRuntimeErrorIsThrown() {
+		try {
+			@SuppressWarnings("unused")
+			Set<String> setResult = map(Arrays.asList(4, 3, 1, 5, 2), toString);
+			fail("Exception should have been raised");
+		} catch (ClassCastException expected) {
+			assertEquals("java.util.ArrayList cannot be cast to java.util.Set", expected.getMessage());
+		}
+		/*
+		 * Not all the wrong conversions are caught on the execution of "map"
+		 * Compiler thinks that List really consists of Integers although there are Strings.
+		 */
+		@SuppressWarnings("unused")
+		List<Integer> listResult = map(Arrays.asList(4, 3, 1, 5, 2), toString);
 	};
 
 	@Test
