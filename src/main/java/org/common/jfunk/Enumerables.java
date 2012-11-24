@@ -147,7 +147,15 @@ public class Enumerables {
 		};
 	};
 
-//	#cycle
+	public static <T> void cycle(Collection<T> c, Action<T> a, int times) {
+	    verifyArguments(c, a);
+	    if (times < 0) {
+	        throw new IllegalArgumentException("'times' should be > 0");
+	    };
+	    for (int i = 0; i < times; i++) {
+	        each(c, a);  
+	    };
+	};
 
 //TODO: Do we need all of the methods in the first version?
 //	#detect
