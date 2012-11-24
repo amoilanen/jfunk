@@ -112,8 +112,22 @@ public class Enumerables {
 		return acc;
 	}
 	
-	//TODO: join
+	public static <T> String join(Collection<T> c, String... separator) {
+		StringBuilder result = new StringBuilder();
+		String sep = (separator.length > 0) ? separator[0] : ",";
+		int lastIndex = -1;
 
+		for (T e : c) {
+			result.append(e.toString()).append(sep);
+		};
+		lastIndex = result.length() - sep.length();
+		if (lastIndex >= 0) {
+			result.replace(result.length() - sep.length(), result.length(), "");
+		};
+		return result.toString();
+	};
+
+//TODO: Do we need all of the methods in the first version?
 //	#count
 //	#cycle
 //	#detect
