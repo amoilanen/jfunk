@@ -7,7 +7,7 @@ import java.util.List;
 /**
  * Functions analogous to those available in the Ruby's Enumerable module.
  * Return values can be the following:
- * ArrayList, HashSet
+ * {@link java.util.ArrayList}, {@link java.util.HashSet}
  * 
  * This class is called <b>Enumerables</b> and not <b>Collections</b> in order not to confuse
  * it with {@link java.util.Collections}
@@ -141,7 +141,6 @@ public class Enumerables {
 	};
 
 //TODO: Do we need all of the methods in the first version?
-//	#count
 //	#cycle
 //	#detect
 //	#drop
@@ -200,12 +199,5 @@ public class Enumerables {
 				throw new IllegalArgumentException("Null argument number " + (i + 1));
 			}
 		}
-	}
-	
-	public static interface Function<T, E> {
-		E call(T input);
-	}
-	
-	public static interface Predicate<T> extends Function<T, Boolean> {
 	}
 }

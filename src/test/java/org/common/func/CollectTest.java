@@ -35,7 +35,7 @@ public class CollectTest {
 	
 	@Test
 	public void ifCollectCalledWithNonEmptyCollectionThenConversionIsAppliedToEachElement() {
-		assertEquals(Arrays.asList(1, 4, 9), Enumerables.collect(Arrays.asList("a", "ab", "abc"), new Enumerables.Function<String, Integer>() {
+		assertEquals(Arrays.asList(1, 4, 9), Enumerables.collect(Arrays.asList("a", "ab", "abc"), new Function<String, Integer>() {
 
 			public Integer call(String input) {
 				return input.length() * input.length();

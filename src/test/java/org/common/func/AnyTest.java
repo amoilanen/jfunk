@@ -9,7 +9,6 @@ import static org.common.func.TestFunctions.falseValue;
 import java.util.Arrays;
 import java.util.Collections;
 
-import org.common.func.Enumerables.Predicate;
 import org.junit.Test;
 
 public class AnyTest {

@@ -1,7 +1,5 @@
 package org.common.func;
 
-import org.common.func.Enumerables.Function;
-import org.common.func.Enumerables.Predicate;
 
 public class TestFunctions {
 

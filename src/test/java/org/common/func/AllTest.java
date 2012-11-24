@@ -36,7 +36,7 @@ public class AllTest {
 	
 	@Test
 	public void ifAllCalledAllElementsSatisfyConditionThenTrue() {
-		assertTrue(Enumerables.all(Arrays.asList("one", "two", "three"), new Enumerables.Predicate<String> () {
+		assertTrue(Enumerables.all(Arrays.asList("one", "two", "three"), new Predicate<String> () {
 			public Boolean call(String input) {
 				return input.length() > 0;
 			}
@@ -45,7 +45,7 @@ public class AllTest {
 	
 	@Test
 	public void ifAllCalledNotAllCollectionElementsSatisfyConditionThenFalse() {
-		assertFalse(Enumerables.all(Arrays.asList("one", "", "three"), new Enumerables.Predicate<String> () {
+		assertFalse(Enumerables.all(Arrays.asList("one", "", "three"), new Predicate<String> () {
 			public Boolean call(String input) {
 				return input.length() > 0;
 			}
