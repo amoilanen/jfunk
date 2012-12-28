@@ -1,11 +1,11 @@
 package org.common.jfunk;
 
+import static org.common.jfunk.Pair.pair;
+
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
-
-import static org.common.jfunk.Pair.pair;
 
 /**
  * Functions analogous to those available in the Ruby's Enumerable module.
@@ -178,6 +178,19 @@ public class Enumerables {
         return acc;
     };
 
+    @SuppressWarnings("unchecked")
+    public static <T> Collection<T> filter(Collection<T> c, Predicate<T> p, Class<?>... resultType) {
+        verifyArguments(c, p);
+        Collection<T> result = (Collection<T>) (resultType.length > 0 ? instantiate(resultType[0]) : new ArrayList<T>());
+
+        for (T e : c) {
+        	if (p.call(e)) {
+                result.add(e);
+        	};
+        };
+        return result;
+    }
+    
 //TODO: Do we need all of the methods in the first version?
 //    #detect
 //    #drop
