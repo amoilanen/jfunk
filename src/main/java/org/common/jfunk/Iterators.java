@@ -7,9 +7,11 @@ package org.common.jfunk;
 public enum Iterators {
 
     //merge
-    //union
+    //concat
     //transform
+    //filter
     //drop
     //takeWhile
     //toArray etc
+    
 }
