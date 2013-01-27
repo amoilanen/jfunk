@@ -76,7 +76,17 @@ public class Sets {
         return result;
     }
 
-    //symmetric difference
+    /**
+     * Computing the symmetric difference of two sets
+     * 
+     * @param set1 first set to compute the symmetric difference for
+     * @param set2 second set to compute the symmetric difference for
+     * @return result symmetrical difference of the two sets
+     */
+    public static <T> Set<T> symDifference(Set<?> set1, Set<?> set2) {
+        return union(difference(set1, set2), difference(set2, set1));
+    }
+
     //isSubset
     //isSuperset
 
