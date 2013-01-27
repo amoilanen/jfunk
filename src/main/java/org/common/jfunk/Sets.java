@@ -6,7 +6,6 @@ import java.util.Set;
 /**
  * Utility functions for working with sets similar to those available for Ruby sets. 
  * Result is always a {@link java.util.HashSet}
- * 
  */
 public class Sets {
     
@@ -87,8 +86,21 @@ public class Sets {
         return union(difference(set1, set2), difference(set2, set1));
     }
 
-    //isSubset
-    //isSuperset
+    /**
+     * Tests if the first set is a subset of the second set
+     * 
+     * @param set1 the original set
+     * @param set2 potential subset of the first set
+     * @return {@code true} if set2 is a subset of set1, {@code false} otherwise
+     */
+    public static Boolean firstContainsSecond(Set<?> set1, Set<?> set2) {
+        for (Object e : set2) {
+            if (!set1.contains(e)) {
+                return false;
+            }
+        };
+        return true;
+    }
 
     //#classify
     //#divide
