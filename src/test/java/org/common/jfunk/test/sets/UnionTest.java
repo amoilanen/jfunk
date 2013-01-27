@@ -3,6 +3,7 @@ package org.common.jfunk.test.sets;
 import static junit.framework.Assert.assertEquals;
 import static junit.framework.Assert.fail;
 
+import java.util.Collections;
 import java.util.Set;
 
 import org.common.jfunk.Sets;
@@ -52,5 +53,10 @@ public class UnionTest {
         } catch (ClassCastException e) {
             assertEquals("java.lang.String cannot be cast to java.lang.Integer", e.getMessage());
         } 
+    }
+
+    @Test
+    public void unionIfNoArgumentsAreProvidedThenEmptySet() {
+        assertEquals("Union of no sets", Collections.<Object>emptySet(), Sets.union());
     }
 }
