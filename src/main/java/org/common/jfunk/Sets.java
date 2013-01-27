@@ -57,12 +57,29 @@ public class Sets {
         return result;
     }
 
-    //difference
+    /**
+     * Computing the difference of two sets
+     * 
+     * @param set1 set to subtract the second set from
+     * @param set2 set to be subtracted
+     * @return result of subtraction of the second set from the first set
+     */
+    @SuppressWarnings("unchecked")
+    public static <T> Set<T> difference(Set<?> set1, Set<?> set2) { 
+        Set<T> result = new HashSet<T>();
+        
+        for (Object e : set1) {
+            if (!set2.contains(e)) {
+                result.add((T) e);
+            }
+        };
+        return result;
+    }
+
     //symmetric difference
     //isSubset
     //isSuperset
-    
- 
+
     //#classify
     //#divide
     //#flatten

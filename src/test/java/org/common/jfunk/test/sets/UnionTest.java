@@ -9,7 +9,6 @@ import java.util.Set;
 import org.common.jfunk.Sets;
 import org.junit.Test;
 
-
 public class UnionTest {
     
     @Test

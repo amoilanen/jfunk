@@ -7,7 +7,6 @@ import java.util.Collections;
 import org.common.jfunk.Sets;
 import org.junit.Test;
 
-
 public class IntersectionTest {
     
     @Test
