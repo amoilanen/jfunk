@@ -2,7 +2,6 @@ package org.common.jfunk.test.enumerables;
 
 import static junit.framework.Assert.assertEquals;
 import static junit.framework.Assert.fail;
-import static org.common.jfunk.Enumerables.count;
 
 import java.util.Arrays;
 import java.util.Collections;
