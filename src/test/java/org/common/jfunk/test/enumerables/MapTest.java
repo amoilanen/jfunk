@@ -78,8 +78,8 @@ public class MapTest {
          * Not all the wrong conversions are caught on the execution of "map"
          * Compiler thinks that List really consists of Integers although there are Strings.
          */
-        @SuppressWarnings("unused")
-        List<Integer> listResult = map(Arrays.asList(4, 3, 1, 5, 2), toString);
+//        @SuppressWarnings("unused")
+//        List<Integer> listResult = map(Arrays.asList(4, 3, 1, 5, 2), toString);
     };
 
     @Test

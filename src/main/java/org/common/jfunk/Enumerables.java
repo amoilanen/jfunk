@@ -191,7 +191,7 @@ public class Enumerables {
         return result;
     }
     
-//TODO: Do we need all of the methods in the first version?
+//TODO (some of the methods listed below):
 //    #detect
 //    #drop
 //    #drop_while
