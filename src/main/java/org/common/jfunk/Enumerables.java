@@ -4,6 +4,8 @@ import static org.common.jfunk.Pair.pair;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.Iterator;
 import java.util.List;
 
@@ -190,6 +192,32 @@ public class Enumerables {
         };
         return result;
     }
+
+    @SuppressWarnings("unchecked")
+    public static <T> Collection<T> sortBy(Collection<T> c, Comparator<T> comp, Class<?>... resultType) {
+        verifyArguments(c, comp);
+        Collection<T> result = (Collection<T>) (resultType.length > 0 ? instantiate(resultType[0]) : new ArrayList<T>());   
+        List<T> sorted = new ArrayList<T>();
+     
+        sorted.addAll(c);        
+        Collections.sort(sorted, comp);
+        
+        result.addAll(sorted);
+        return result;
+    }
+
+    @SuppressWarnings("unchecked")
+    public static <T extends Comparable<? super T>> Collection<T> sort(Collection<T> c, Class<?>... resultType) {
+        verifyArguments(c);
+        Collection<T> result = (Collection<T>) (resultType.length > 0 ? instantiate(resultType[0]) : new ArrayList<T>());   
+        List<T> sorted = new ArrayList<T>();
+        
+        sorted.addAll(c);        
+        Collections.sort(sorted);
+        
+        result.addAll(sorted);
+        return result;
+    }
     
 //TODO (some of the methods listed below):
 //    #detect
@@ -222,8 +250,6 @@ public class Enumerables {
 //    #reverse_each
 //    #select
 //    #slice_before
-//    #sort
-//    #sort_by
 //    #take
 //    #take_while
 //    #to_a
