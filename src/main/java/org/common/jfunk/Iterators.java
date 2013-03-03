@@ -2,6 +2,7 @@ package org.common.jfunk;
 
 import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
@@ -12,12 +13,17 @@ import java.util.List;
  */
 public class Iterators {
 
-    //merge
-    //transform
+    //map
+    //forEach
     //filter
     //drop
     //takeWhile
-    //toArray etc
+    
+    public static <T> Iterator<T> merge(Iterator<?>... iterators) {
+        final List<Iterator<?>> iters = Arrays.<Iterator<?>>asList(iterators);
+        
+        return new MergedIterator<T>(iters);
+    }
 
     public static <T> Iterator<T> concat(Iterator<?>... iterators) {        
         @SuppressWarnings("unchecked")
@@ -27,6 +33,20 @@ public class Iterators {
             result = concatTwo(result, iterators[i]);
         };
         return result;
+    }
+    
+    public static <T> List<T> toList(Iterator<T> iter) {
+        List<T> result = new ArrayList<T>();
+        
+        while (iter.hasNext()) {
+            result.add(iter.next());
+        };
+        return result;
+    }
+
+    @SuppressWarnings("unchecked")
+    public static <T> T[] toArray(Iterator<T> iter, Class<T> clazz) {
+        return (T[]) toList(iter).toArray((T[]) Array.newInstance(clazz, 0));
     }
 
     private static <T> Iterator<T> concatTwo(final Iterator<?> iterator1, final Iterator<?> iterator2) {
@@ -47,18 +67,49 @@ public class Iterators {
             
         };
     }
-    
-    public static <T> List<T> toList(Iterator<T> iter) {
-        List<T> result = new ArrayList<T>();
-        
-        while (iter.hasNext()) {
-            result.add(iter.next());
-        };
-        return result;
-    }
 
-    @SuppressWarnings("unchecked")
-    public static <T> T[] toArray(Iterator<T> iter, Class<T> clazz) {
-        return (T[]) toList(iter).toArray((T[]) Array.newInstance(clazz, 0));
+    private static class MergedIterator<T> implements Iterator<T> {
+
+        private final List<Iterator<?>> merged;
+
+        private int iteratorsSize;
+        
+        private int index;
+        
+        private MergedIterator(List<Iterator<?>> merged) {
+            this.merged = merged;
+            this.iteratorsSize = merged.size();
+            this.index = 0;
+        }
+        
+        public boolean hasNext() {
+            return Enumerables.any(merged, new Predicate<Iterator<?>>() {
+
+                public Boolean call(Iterator<?> x) {
+                    return x.hasNext();
+                }
+            });
+        }
+
+        @SuppressWarnings("unchecked")
+        public T next() {
+            int initialIndex = index;
+
+            do {
+                Iterator<?> currentIterator = merged.get(index);                
+                index++;
+                if (iteratorsSize == index) {
+                    index = 0;
+                };
+                if (currentIterator.hasNext()) {
+                    return (T) currentIterator.next();
+                };
+            } while ((initialIndex != index) && (index >= 0) && (index < iteratorsSize));
+            return null;
+        }
+
+        public void remove() {
+            throw new UnsupportedOperationException();
+        }
     }
 }
