@@ -13,11 +13,15 @@ import java.util.List;
  */
 public class Iterators {
 
-    //map
     //forEach
-    //filter
     //drop
     //takeWhile
+    //map
+    
+    
+    public static <T> Iterator<T> filter(Iterator<T> iterator, Predicate<T> p) {        
+        return new FilteredIterator<T>(iterator, p);
+    }
     
     public static <T> Iterator<T> merge(Iterator<?>... iterators) {
         final List<Iterator<?>> iters = Arrays.<Iterator<?>>asList(iterators);
@@ -68,6 +72,56 @@ public class Iterators {
         };
     }
 
+    private static class FilteredIterator<T> implements Iterator<T> {
+        
+        private final Iterator<T> iterator;
+        
+        private final Predicate<T> predicate;
+        
+        private T cachedElement;
+        
+        private boolean hasReadCachedElement;
+        
+        public FilteredIterator(Iterator<T> iterator, Predicate<T> predicate) {
+            this.iterator = iterator;
+            this.predicate = predicate;
+            this.cachedElement = null;
+            this.hasReadCachedElement = true;
+        }
+        
+        public boolean hasNext() {
+            return hasNextElementThatSatisfiesFilter();
+        }
+
+        public T next() {
+            if (!hasReadCachedElement || hasNextElementThatSatisfiesFilter()) {
+                hasReadCachedElement = true;
+                return cachedElement;
+            }
+            return null;
+        }
+
+        public void remove() {
+            throw new UnsupportedOperationException();
+        }
+        
+        private boolean hasNextElementThatSatisfiesFilter() {
+            if (!hasReadCachedElement) {
+                return true;
+            }
+            while (iterator.hasNext()) {
+                T element = iterator.next();
+
+                if (predicate.call(element)) {
+                    cachedElement = element;
+                    hasReadCachedElement = false;
+                    return true;
+                }
+            }
+            return false;
+        }
+    }
+    
     private static class MergedIterator<T> implements Iterator<T> {
 
         private final List<Iterator<?>> merged;
