@@ -12,12 +12,10 @@ import java.util.List;
  * 
  */
 public class Iterators {
-
-    //forEach
-    //drop
-    //takeWhile
-    //map
     
+    public static <T, U> Iterator<U> map(Iterator<T> iterator, Function<T, U> f) {
+        return new MappedIterator<T, U>(iterator, f);
+    }
     
     public static <T> Iterator<T> filter(Iterator<T> iterator, Predicate<T> p) {        
         return new FilteredIterator<T>(iterator, p);
@@ -53,6 +51,11 @@ public class Iterators {
         return (T[]) toList(iter).toArray((T[]) Array.newInstance(clazz, 0));
     }
 
+    //TODO: Implement the following remaining methods
+    //forEach
+    //drop
+    //takeWhile
+    
     private static <T> Iterator<T> concatTwo(final Iterator<?> iterator1, final Iterator<?> iterator2) {
         return new Iterator<T>() {
 
@@ -72,6 +75,31 @@ public class Iterators {
         };
     }
 
+    private static class MappedIterator<T, U> implements Iterator<U> {
+        
+        
+        private final Iterator<T> iterator;
+        
+        private final Function<T, U> function;
+        
+        public MappedIterator(Iterator<T> iterator, Function<T, U> function) {
+            this.iterator = iterator;
+            this.function = function;
+        }
+
+        public boolean hasNext() {
+            return iterator.hasNext();
+        }
+
+        public U next() {
+            return function.call(iterator.next());
+        }
+
+        public void remove() {
+            throw new UnsupportedOperationException();
+        }
+    }
+    
     private static class FilteredIterator<T> implements Iterator<T> {
         
         private final Iterator<T> iterator;
